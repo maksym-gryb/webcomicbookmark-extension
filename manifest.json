@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "Beastify",
+    "version": "1.0",
+    "description": "Bookmark for webcomic archives",
+    "homepage_url": "none, yet!",
+    "icons": {
+        "48": "icons/icon-48.png"
+    },
+    "sidebar_action": {
+        "default_title": "Webcomic Bookmarker",
+        "default_panel": "sidebar.html",
+        "default_icon": "sidebar_icon.png"
+    }
+}
