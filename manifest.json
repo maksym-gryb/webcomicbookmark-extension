@@ -1,25 +1,27 @@
 {
     "manifest_version": 2,
-    "name": "WBfjsdoifjdsifjsjdo",
+    "name": "Webcomic Tracker",
+    "description": "Track your progress through webcomics",
     "version": "1.0",
-    "description": "Bookmark for webcomic archives",
-    "homepage_url": "none, yet!",
-    "icons": {
-        "48": "icons/icon-48.png"
+    "applications": {
+        "gecko": {
+            "strict_min_version": "54.0a1"
+        }
     },
     "sidebar_action": {
-        "default_title": "Webcomic Bookmarker",
-        "default_panel": "panel.html",
-        "default_icon": "sidebar_icon.png"
+        "default_icon": "icons/star.png",
+        "default_title": "WB Tracker",
+        "default_panel": "sidebar/panel.html"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "*"
-            ],
-            "js": [
-                "wb.js"
-            ]
+    "permissions": [
+        "storage",
+        "tabs"
+    ],
+    "commands": {
+        "_execute_sidebar_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y"
+            }
         }
-    ]
+    }
 }
