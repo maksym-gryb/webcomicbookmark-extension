@@ -18,9 +18,9 @@
         "tabs"
     ],
     "commands": {
-        "_execute_sidebar_action": {
+        "toggle-feature": {
             "suggested_key": {
-                "default": "Ctrl+;"
+                "default": "Ctrl+Shift+U"
             }
         }
     },
