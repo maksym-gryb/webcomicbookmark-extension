@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Beastify",
+    "name": "WBfjsdoifjdsifjsjdo",
     "version": "1.0",
     "description": "Bookmark for webcomic archives",
     "homepage_url": "none, yet!",
@@ -9,7 +9,17 @@
     },
     "sidebar_action": {
         "default_title": "Webcomic Bookmarker",
-        "default_panel": "sidebar.html",
+        "default_panel": "panel.html",
         "default_icon": "sidebar_icon.png"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*"
+            ],
+            "js": [
+                "wb.js"
+            ]
+        }
+    ]
 }
