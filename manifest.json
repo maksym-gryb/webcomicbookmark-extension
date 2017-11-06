@@ -20,7 +20,7 @@
     "commands": {
         "toggle-feature": {
             "suggested_key": {
-                "default": "Ctrl+Shift+U"
+                "default": "Ctrl+1"
             }
         }
     },
