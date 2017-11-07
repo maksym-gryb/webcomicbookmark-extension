@@ -16,9 +16,24 @@ p {
   margin: 1em 2em;
 }
 
+.btn{
+	padding: 2px 2px 2px 2px;
+	border: 1px solid black;
+	margin: 0;
+	
+	width: 50px;
+	height: 50px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.btn:hover{
+	background-color: orange;
+}
+
 #log {
-  height: 90%;
-  margin: 2em 2em 0 2em;
+  min-height: 90%;
+  margin: 10px 2px 2px 2px;
   border: .5em solid #DDE4E9;
   transition: background-color .2s ease-out;
 }
