@@ -15,5 +15,5 @@ gettingAllCommands.then((commands) => {
  * "Command+Shift+U".
  */
 browser.commands.onCommand.addListener((command) => {
-    log_sidepanel.innerHTML = command;
+    log_sidepanel.innerHTML += command + '<br />';
 });
