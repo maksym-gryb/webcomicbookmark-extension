@@ -17,9 +17,8 @@ function forget(){
 		base_url = getBaseURL(tabs[0].url);
 		contentToStore[base_url] = "";
 		browser.storage.local.set(contentToStore);
+		updateContent();
 	});
-	
-	updateContent();
 }
 
 browser.commands.onCommand.addListener((command) => {
@@ -28,11 +27,20 @@ browser.commands.onCommand.addListener((command) => {
 });
 
 function updateContent() {
-	logs_sidepanel.innerHTML = browser.storage.local.get(null).then((results) => {
+	browser.storage.local.get(null).then((results) => {
 		var keys = Object.keys(results);
+		logs_sidepanel.innerHTML = "";
 		for (let key of keys) {
 		  logs_sidepanel.innerHTML += results[key];
 		}
+	});
+	
+	browser.tabs.query({windowId: myWindowId, active: true})
+		.then((tabs) => {
+			return browser.storage.local.get(tabs[0].url);
+		})
+		.then((storedInfo) => {
+			log_sidepanel.innerHTML = storedInfo[Object.keys(storedInfo)[0]];
 	});
 }
 
@@ -49,12 +57,14 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
 function recordUrl(tabInfo){
 	log_sidepanel.innerHTML += tabInfo.url + "<br />";
 	remember();
+	updateContent();
 }
 
 function webcomicAddPopup(){
 	browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
 		log_sidepanel.innerHTML += tabs[0].url + "<br />";
 		remember();
+		updateContent();
 	});
 }
 
@@ -62,6 +72,7 @@ function updateWebcomic(){
 	browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
 		log_sidepanel.innerHTML = tabs[0].url;
 		remember();
+		updateContent();
 	});
 }
 
