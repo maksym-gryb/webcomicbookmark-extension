@@ -21,11 +21,6 @@ function forget(){
 	});
 }
 
-browser.commands.onCommand.addListener((command) => {
-    log_sidepanel.innerHTML += command + '<br />';
-	remember();
-});
-
 function updateContent() {
 	browser.storage.local.get(null).then((results) => {
 		var keys = Object.keys(results);
