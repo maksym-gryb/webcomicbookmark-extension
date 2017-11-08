@@ -4,7 +4,8 @@ var log_sidepanel = document.querySelector('#log');
 function remember(){
 	browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
 		let contentToStore = {};
-		contentToStore[tabs[0].url] = log_sidepanel.innerHTML;
+		base_url = getBaseURL(tabs[0].url);
+		contentToStore[base_url] = log_sidepanel.innerHTML;
 		browser.storage.local.set(contentToStore);
 	});
 }
@@ -12,7 +13,8 @@ function remember(){
 function forget(){
 	browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
 		let contentToStore = {};
-		contentToStore[tabs[0].url] = "";
+		base_url = getBaseURL(tabs[0].url);
+		contentToStore[base_url] = "";
 		browser.storage.local.set(contentToStore);
 	});
 	
@@ -27,7 +29,7 @@ browser.commands.onCommand.addListener((command) => {
 function updateContent() {
   browser.tabs.query({windowId: myWindowId, active: true})
     .then((tabs) => {
-      return browser.storage.local.get(tabs[0].url);
+      return browser.storage.local.get(getBaseURL(tabs[0].url));
     })
     .then((storedInfo) => {
       log_sidepanel.innerHTML = storedInfo[Object.keys(storedInfo)[0]];
@@ -51,7 +53,14 @@ function recordUrl(tabInfo){
 
 function webcomicAddPopup(){
 	browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-		log_sidepanel.innerHTML += tabs[0].url.split('/').slice(0, 3).join("/") + "<br />";
+		log_sidepanel.innerHTML += tabs[0].url + "<br />";
+		remember();
+	});
+}
+
+function updateWebcomic(){
+	browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
+		log_sidepanel.innerHTML = tabs[0].url;
 		remember();
 	});
 }
@@ -59,3 +68,10 @@ function webcomicAddPopup(){
 document.querySelector("#add").addEventListener("click", webcomicAddPopup);
 
 document.querySelector("#remove").addEventListener("click", forget);
+
+document.querySelector("#update").addEventListener("click", updateWebcomic);
+
+/* Utility Functions */
+function getBaseURL(url){//convert this to simply get the current tab, instead of needing a parameter
+	return url.split('/').slice(0, 3).join("/");
+}
