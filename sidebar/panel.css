@@ -32,7 +32,14 @@ p {
 }
 
 #log {
-  min-height: 90%;
+  height: 30%;
+  margin: 10px 2px 2px 2px;
+  border: .5em solid #DDE4E9;
+  transition: background-color .2s ease-out;
+}
+
+#logs {
+  height: 30%;
   margin: 10px 2px 2px 2px;
   border: .5em solid #DDE4E9;
   transition: background-color .2s ease-out;
