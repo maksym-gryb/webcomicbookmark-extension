@@ -44,9 +44,16 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
 });
 
 /* Add new webcomic */
-function webcomicAddPopup(){
-	log_sidepanel.innerHTML += "ptoato<br />";
+function recordUrl(tabInfo){
+	log_sidepanel.innerHTML += tabInfo.url + "<br />";
 	remember();
+}
+
+function webcomicAddPopup(){
+	browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
+		log_sidepanel.innerHTML += tabs[0].url.split('/').slice(0, 3).join("/") + "<br />";
+		remember();
+	});
 }
 
 document.querySelector("#add").addEventListener("click", webcomicAddPopup);
