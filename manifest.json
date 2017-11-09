@@ -10,7 +10,7 @@
     },
     "sidebar_action": {
         "default_icon": "icons/star.png",
-        "default_title": "WB Tracker",
+        "default_title": "Webcomic Tracker",
         "default_panel": "sidebar/panel.html"
     },
     "permissions": [
@@ -28,5 +28,22 @@
         "scripts": [
             "background.js"
         ]
-    }
+    },
+    "browser_action": {
+        "default_icon": "icons/wct-32.png",
+        "theme_icons": [
+            {
+                "light": "icons/wct-32-light.png",
+                "dark": "icons/wct-32.png",
+                "size": 32
+            }
+        ],
+        "default_title": "Webcomic Tracker",
+        "default_popup": "popup/popup.html"
+    },
+    "web_accessible_resources": [
+        "beasts/frog.jpg",
+        "beasts/turtle.jpg",
+        "beasts/snake.jpg"
+    ]
 }
