@@ -4,14 +4,23 @@ for (let el of document.querySelectorAll('.hidden'))
 
 // Do all the things
 var myWindowId;
-var log_sidepanel = document.querySelector('#comic-name');
+var comic_name = document.querySelector('#comic_name');
+var title_input = document.querySelector('#title_input');
 
 function remember() {
     browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
         let contentToStore = {};
+        let obj = {};
+
+        obj.title = title_input.value;
+        obj.url = tabs[0].url;
+        obj.host = getBaseURL(tabs[0].url);
+
         base_url = getBaseURL(tabs[0].url);
-        contentToStore[base_url] = log_sidepanel.innerHTML;
+        contentToStore[base_url] = obj;
         browser.storage.local.set(contentToStore);
+
+        updateContent();
     });
 }
 
@@ -31,7 +40,8 @@ function updateContent() {
             return browser.storage.local.get(getBaseURL(tabs[0].url));
         })
         .then((storedInfo) => {
-            log_sidepanel.innerHTML = storedInfo[Object.keys(storedInfo)[0]];
+            title_input.value = storedInfo[Object.keys(storedInfo)[0]].title;
+            comic_name.innerHTML = storedInfo[Object.keys(storedInfo)[0]].url;
         });
 }
 
@@ -44,47 +54,20 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     updateContent();
 });
 
-/* Add new webcomic */
-function recordUrl(tabInfo) {
-    log_sidepanel.innerHTML += tabInfo.url + '<br />';
-    remember();
-    updateContent();
-}
-
-function webcomicAddPopup() {
-    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-        log_sidepanel.innerHTML += tabs[0].url + '<br />';
-        remember();
-        updateContent();
-    });
-}
-
-function updateWebcomic() {
-    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-        log_sidepanel.innerHTML = tabs[0].url;
-        remember();
-        updateContent();
-    });
-}
-
 function gotoWebcomicPage() {
     browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
         try {
-            browser.tabs.create({url: log_sidepanel.innerHTML});
+            browser.tabs.create({url: comic_name.innerHTML});
             browser.tabs.remove(tabs[0].id);
         } catch (err) {
-            log_sidepanel.innerHTML = err;
+            comic_name.innerHTML = err;
         }
     });
 }
 
-// document.querySelector('#add').addEventListener('click', webcomicAddPopup);
+document.querySelector('#update').addEventListener('click', remember);
 
-// document.querySelector('#remove').addEventListener('click', forget);
-
-document.querySelector('#update-2').addEventListener('click', updateWebcomic);
-
-document.querySelector('#goto-2').addEventListener('click', gotoWebcomicPage);
+document.querySelector('#goto').addEventListener('click', gotoWebcomicPage);
 
 /* Utility Functions */
 function getBaseURL(url) {

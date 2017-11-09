@@ -1,11 +1,34 @@
 var myWindowId;
 var comics_list = document.querySelector('#comics_list');
 
+/* Constructor for Comic links */
+function createComicLink(url, host) {
+    var comic_link = document.createElement('a');
+    comic_link.classList.add('comic_link');
+    comic_link.setAttribute('href', url);
+    comic_link.innerHTML = host;
+
+    comics_list.appendChild(comic_link);
+}
+
+/* The good stuff */
 function remember() {
     browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
+        /* UNDERCONSTRUCTION */
+        var obj = Object.create();
+        obj.title = '';
+        obj.url = '';
+        obj.host = '';
+
+        obj.title = prompt('Comic Title', tabs[0].title);
+        obj.url = tabs[0].url;
+        obj.host = getBaseURL(tabs[0].url);
+
+        /* END UNDERCONSTRUCTION */
         let contentToStore = {};
         base_url = getBaseURL(tabs[0].url);
-        contentToStore[base_url] = comics_list.innerHTML;
+        // contentToStore[base_url] = tabs[0].url;
+        contentToStore[base_url] = obj;
         browser.storage.local.set(contentToStore);
     });
 }
@@ -25,9 +48,8 @@ function updateContent() {
         var keys = Object.keys(results);
         comics_list.innerHTML = '';
         for (let key of keys) {
-            comics_list.innerHTML += '<a href="' + results[key] + '"' +
-                '>' + getBaseURL(results[key]) + '</a>' +
-                '<br />';
+            createComicLink(results[key].url, results[key].host);
+            // createComicLink(results[key], getBaseURL(results[key]));
         }
     });
 }
