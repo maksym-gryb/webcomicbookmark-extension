@@ -12,10 +12,6 @@ body {
   background-color: #F4F7F8;
 }
 
-p {
-  margin: 1em 2em;
-}
-
 .btn{
 	padding: 2px 2px 2px 2px;
 	border: 1px solid black;
@@ -31,16 +27,15 @@ p {
 	background-color: orange;
 }
 
-#log {
-  height: 30%;
+#comics_list {
+  height: 90%;
   margin: 10px 2px 2px 2px;
   border: .5em solid #DDE4E9;
   transition: background-color .2s ease-out;
 }
 
-#logs {
-  height: 30%;
-  margin: 10px 2px 2px 2px;
-  border: .5em solid #DDE4E9;
-  transition: background-color .2s ease-out;
+.comic_link{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
 }
