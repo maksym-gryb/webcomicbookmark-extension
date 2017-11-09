@@ -33,7 +33,7 @@
         "default_icon": "icons/wct-32.png",
         "theme_icons": [
             {
-                "light": "icons/wct-32-light.png",
+                "light": "icons/wct-32.png",
                 "dark": "icons/wct-32.png",
                 "size": 32
             }
