@@ -57,12 +57,21 @@ browser.windows.getCurrent({populate: true}).then((windowInfo) => {
 function gotoWebcomicPage() {
     browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
         try {
-            browser.tabs.create({url: comic_name.innerHTML});
-            browser.tabs.remove(tabs[0].id);
+            browser.tabs
+                .update(tabs[0].id, {active: true, url: comic_name.innerHTML})
+                .then(onUpdate, onError);
         } catch (err) {
             comic_name.innerHTML = err;
         }
     });
+}
+
+function onUpdate() {
+    // dummy function
+};
+
+function onError() {
+    // dummy function
 }
 
 document.querySelector('#update').addEventListener('click', remember);
