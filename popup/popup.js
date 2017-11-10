@@ -5,14 +5,15 @@ for (let el of document.querySelectorAll('.hidden'))
 // Do all the things
 var myWindowId;
 var comic_name = document.querySelector('#comic_name');
-var title_input = document.querySelector('#title_input');
+var title_input = document.querySelectorAll('.title_input');
+var edit_comic_name = document.querySelector('#edit-comic-name');
 
 function remember() {
     browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
         let contentToStore = {};
         let obj = {};
 
-        obj.title = title_input.value;
+        obj.title = title_input[0].value;
         obj.url = tabs[0].url;
         obj.host = getBaseURL(tabs[0].url);
 
@@ -40,14 +41,45 @@ function updateContent() {
             return browser.storage.local.get(getBaseURL(tabs[0].url));
         })
         .then((storedInfo) => {
-            title_input.value = storedInfo[Object.keys(storedInfo)[0]].title;
-            comic_name.innerHTML = storedInfo[Object.keys(storedInfo)[0]].url;
+            // for (let el of title_input) el.style.visible = 'hidden';
+
+            var obj = storedInfo[Object.keys(storedInfo)[0]];
+
+            /*
+            if (obj.title == null) {
+                // show editable comic name
+                document.querySelector('#input_title_block').style.visible =
+                    'visible';
+                document.querySelector('#display_title_block').style.visible =
+                    'hidden';
+            } else {
+                document.querySelector('#input_title_block').style.visible =
+                    'hidden';
+                document.querySelector('#display_title_block').style.visible =
+                    'visible';
+
+                document.querySelector('#edit-comic-name').innerHTML =
+                    obj.title;
+                document.querySelector('#display-comic-name').innerHTML =
+                    obj.title;
+            }
+            */
+
+            comic_name.innerHTML = obj.url;
         });
 }
 
 browser.tabs.onActivated.addListener(updateContent);
 
 browser.tabs.onUpdated.addListener(updateContent);
+
+/*
+edit_comic_name.addEventListener('click', function() {
+    // show editable comic name
+    document.querySelector('#input_title_bloc').style.visible = 'visible';
+    document.querySelector('#display_title_block').style.visible = 'hidden';
+});
+*/
 
 browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     myWindowId = windowInfo.id;

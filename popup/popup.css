@@ -1,9 +1,32 @@
+.title_input{
+    display: inline;
+
+    padding: 2px 2px 2px 2px;
+    margin: 35px 10px 10px 10px;
+}
+
+#goto{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    margin: auto;
+}
+
+#update{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    margin: auto;
+}
+
 .button{
+    display: inline;
+
     padding: 2px 2px 2px 2px;
     border: 1px solid black;
     margin: 2px 2px 2px 2px;
 
-    width: 100%;
+    width: 10%;
     height: 20px;
 
     text-align: center;
