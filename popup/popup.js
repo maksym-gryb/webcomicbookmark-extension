@@ -12,12 +12,12 @@ function remember() {
     browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
         let contentToStore = {};
         let obj = {};
+        var base_url = getBaseURL(tabs[0].url);
 
         obj.title = title_input[0].value;
         obj.url = tabs[0].url;
-        obj.host = getBaseURL(tabs[0].url);
+        obj.host = base_url;
 
-        base_url = getBaseURL(tabs[0].url);
         contentToStore[base_url] = obj;
         browser.storage.local.set(contentToStore);
 
@@ -44,26 +44,26 @@ function updateContent() {
             // for (let el of title_input) el.style.visible = 'hidden';
 
             var obj = storedInfo[Object.keys(storedInfo)[0]];
+            // comic_name.innerHTML = obj.url;
 
-            /*
-            if (obj.title == null) {
+            if (!obj.title) {
                 // show editable comic name
-                document.querySelector('#input_title_block').style.visible =
-                    'visible';
-                document.querySelector('#display_title_block').style.visible =
-                    'hidden';
+                document.querySelector('#input_title_block').style.display =
+                    'block';
+                document.querySelector('#display_title_block').style.display =
+                    'none';
             } else {
-                document.querySelector('#input_title_block').style.visible =
-                    'hidden';
-                document.querySelector('#display_title_block').style.visible =
-                    'visible';
+                // set comic name
+                document.querySelector('#edit-comic-title').innerHTML =
+                    obj.title;
+                document.querySelector('#display-comic-name').value = obj.title;
 
-                document.querySelector('#edit-comic-name').innerHTML =
-                    obj.title;
-                document.querySelector('#display-comic-name').innerHTML =
-                    obj.title;
+                // show displayed comic name
+                document.querySelector('#input_title_block').style.display =
+                    'none';
+                document.querySelector('#display_title_block').style.display =
+                    'block';
             }
-            */
 
             comic_name.innerHTML = obj.url;
         });
@@ -73,13 +73,11 @@ browser.tabs.onActivated.addListener(updateContent);
 
 browser.tabs.onUpdated.addListener(updateContent);
 
-/*
 edit_comic_name.addEventListener('click', function() {
     // show editable comic name
-    document.querySelector('#input_title_bloc').style.visible = 'visible';
-    document.querySelector('#display_title_block').style.visible = 'hidden';
+    document.querySelector('#input_title_block').style.display = 'block';
+    document.querySelector('#display_title_block').style.display = 'none';
 });
-*/
 
 browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     myWindowId = windowInfo.id;

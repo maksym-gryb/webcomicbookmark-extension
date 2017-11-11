@@ -5,6 +5,11 @@
     margin: 35px 10px 10px 10px;
 }
 
+#display_title_block{
+    padding: 2px 2px 2px 2px;
+    margin: 35px 10px 10px 10px;
+}
+
 #goto{
     position: absolute;
     top: 5px;
