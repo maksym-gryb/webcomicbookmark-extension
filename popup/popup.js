@@ -36,14 +36,18 @@ function forget() {
 }
 
 function updateContent() {
-    browser.tabs.query({windowId: myWindowId, active: true})
+    browser.tabs.query({currentWindow: true, active: true})
         .then((tabs) => {
             return browser.storage.local.get(getBaseURL(tabs[0].url));
         })
         .then((storedInfo) => {
             var obj = storedInfo[Object.keys(storedInfo)[0]];
 
-            if (!obj.title) {
+            if (!obj || !obj.title) {
+                // set comic name
+                document.querySelector('#edit-comic-title').innerHTML = '';
+                document.querySelector('#display-comic-name').value = '';
+
                 // show editable comic name
                 document.querySelector('#input_title_block').style.display =
                     'block';
@@ -62,7 +66,10 @@ function updateContent() {
                     'block';
             }
 
-            comic_name.innerHTML = obj.url;
+            if (!obj)
+                comic_name.innerHTML = '';
+            else
+                comic_name.innerHTML = obj.url;
         });
 }
 
