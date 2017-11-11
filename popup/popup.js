@@ -41,10 +41,7 @@ function updateContent() {
             return browser.storage.local.get(getBaseURL(tabs[0].url));
         })
         .then((storedInfo) => {
-            // for (let el of title_input) el.style.visible = 'hidden';
-
             var obj = storedInfo[Object.keys(storedInfo)[0]];
-            // comic_name.innerHTML = obj.url;
 
             if (!obj.title) {
                 // show editable comic name
