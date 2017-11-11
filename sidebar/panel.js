@@ -9,6 +9,7 @@ function createComicLink(url, host) {
     comic_link.innerHTML = host;
 
     comics_list.appendChild(comic_link);
+    comics_list.appendChild(document.createElement('br'));
 }
 
 /* The good stuff */
