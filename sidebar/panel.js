@@ -48,8 +48,9 @@ function updateContent() {
         var keys = Object.keys(results);
         comics_list.innerHTML = '';
         for (let key of keys) {
-            createComicLink(results[key].url, results[key].host);
-            // createComicLink(results[key], getBaseURL(results[key]));
+            createComicLink(
+                results[key].url,
+                results[key].title ? results[key].title : results[key].host);
         }
     });
 }
