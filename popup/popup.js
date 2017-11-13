@@ -17,6 +17,7 @@ function remember() {
         obj.title = title_input[0].value;
         obj.url = tabs[0].url;
         obj.host = base_url;
+        obj.favicon = tabs[0].favIconUrl;
 
         contentToStore[base_url] = obj;
         browser.storage.local.set(contentToStore);
