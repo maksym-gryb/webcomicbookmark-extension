@@ -10,7 +10,7 @@ function createComicLink(url, host, favicon) {
         '<img src=\'' + favicon + '\' width=\'16px\' height=\'16px\'>' + host;
 
     comics_list.appendChild(comic_link);
-    comics_list.appendChild(document.createElement('br'));
+    // comics_list.appendChild(document.createElement('br'));
 }
 
 /* The good stuff */
