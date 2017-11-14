@@ -8,6 +8,9 @@ var comic_name = document.querySelector('#comic_name');
 var title_input = document.querySelectorAll('.title_input');
 var edit_comic_name = document.querySelector('#edit-comic-name');
 
+const BOOKMARK_TYPE = 0;
+const FOLDER_TYPE = 1;
+
 function remember() {
     browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
         let contentToStore = {};
@@ -18,6 +21,11 @@ function remember() {
         obj.url = tabs[0].url;
         obj.host = base_url;
         obj.favicon = tabs[0].favIconUrl;
+
+        /* FUTURE DEVELOPMENT: sidepanel tree-view */
+        obj.type = BOOKMARK_TYPE;
+        obj.childOf = null;
+        /* END FUTURE DEVELOPMENT*/
 
         contentToStore[base_url] = obj;
         browser.storage.local.set(contentToStore);
