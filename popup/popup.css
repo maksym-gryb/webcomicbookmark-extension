@@ -7,7 +7,7 @@
 
 #display_title_block{
     padding: 2px 2px 2px 2px;
-    margin: 35px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
 }
 
 #goto{
@@ -31,10 +31,12 @@
     border: 1px solid black;
     margin: 2px 2px 2px 2px;
 
-    width: 10%;
+    width: 20px;
+    min-width: 20px;
     height: 20px;
 
     text-align: center;
+    vertical-align: middle;
 
     font-family: "Dejavu Sans", "Arial";
 }
@@ -55,4 +57,9 @@
     text-align: left;
 
     font-family: "Dejavu Sans", "Arial";
+}
+
+/* WIREFRAMES */
+/*{
+    border: 1px solid black;
 }
