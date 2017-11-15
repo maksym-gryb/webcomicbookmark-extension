@@ -1,39 +1,54 @@
+html, body{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+
+    width: 300px;
+    max-width: 300px;
+}
+
+#buttons{
+    padding: 0px;
+    border: 0px;
+    margin: 0px; 
+
+    width:100%;
+}
+
 .title_input{
     display: inline;
 
-    padding: 2px 2px 2px 2px;
-    margin: 35px 10px 10px 10px;
+    padding: 0px;
+    margin: 20px 0px 0px 0px;
 }
 
 #display_title_block{
-    padding: 2px 2px 2px 2px;
-    margin: 10px 10px 10px 10px;
-}
-
-#goto{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    margin: auto;
+    padding: 0px;
+    margin: 10px 0px 0px 0px;
 }
 
 #update{
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    margin: auto;
+    float: left;
+    width: 50%;
+
+    border-right: 1px solid black;
+}
+
+#goto{
+    float: right;
+    width: 50%;
 }
 
 .button{
-    display: inline;
+    top: 0px;
 
-    padding: 2px 2px 2px 2px;
-    border: 1px solid black;
-    margin: 2px 2px 2px 2px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
 
-    width: 20px;
-    min-width: 20px;
-    height: 20px;
+    height: 35px;
+
+    box-sizing: border-box;
 
     text-align: center;
     vertical-align: middle;
@@ -47,19 +62,15 @@
     cursor: pointer;
 }
 
-.comic-name{
-    padding: 2px 2px 2px 2px;
+#comic_name{
+    padding: 0px;
     border: 0px;
-    margin: 2px 2px 2px 2px;
+    margin: 0px;
 
-    width: 100%;
+    word-wrap: break-word;
+    box-sizing: border-box;
 
     text-align: left;
 
     font-family: "Dejavu Sans", "Arial";
-}
-
-/* WIREFRAMES */
-/*{
-    border: 1px solid black;
 }
