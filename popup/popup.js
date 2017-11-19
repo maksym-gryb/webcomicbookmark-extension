@@ -4,6 +4,8 @@ for (let el of document.querySelectorAll('.hidden'))
 
 // Do all the things
 var myWindowId;
+var comic_name = document.querySelector('#comic_name');
+var title_input = document.querySelectorAll('.title_input');
 
 const BOOKMARK_TYPE = 0;
 const FOLDER_TYPE = 1;
