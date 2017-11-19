@@ -13,38 +13,6 @@ function createComicLink(url, host, favicon) {
     // comics_list.appendChild(document.createElement('br'));
 }
 
-/* The good stuff */
-function remember() {
-    browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
-        /* UNDERCONSTRUCTION */
-        var obj = Object.create();
-        obj.title = '';
-        obj.url = '';
-        obj.host = '';
-
-        obj.title = prompt('Comic Title', tabs[0].title);
-        obj.url = tabs[0].url;
-        obj.host = getBaseURL(tabs[0].url);
-
-        /* END UNDERCONSTRUCTION */
-        let contentToStore = {};
-        base_url = getBaseURL(tabs[0].url);
-        // contentToStore[base_url] = tabs[0].url;
-        contentToStore[base_url] = obj;
-        browser.storage.local.set(contentToStore);
-    });
-}
-
-function forget() {
-    browser.tabs.query({windowId: myWindowId, active: true}).then((tabs) => {
-        let contentToStore = {};
-        base_url = getBaseURL(tabs[0].url);
-        contentToStore[base_url] = '';
-        browser.storage.local.set(contentToStore);
-        updateContent();
-    });
-}
-
 function updateContent() {
     browser.storage.local.get(null).then((results) => {
         var keys = Object.keys(results);
@@ -63,47 +31,3 @@ browser.storage.onChanged.addListener(updateContent);
 browser.tabs.onActivated.addListener(updateContent);
 
 browser.tabs.onUpdated.addListener(updateContent);
-
-browser.windows.getCurrent({populate: true}).then((windowInfo) => {
-    myWindowId = windowInfo.id;
-    updateContent();
-});
-
-/* Add new webcomic */
-function recordUrl(tabInfo) {
-    comics_list.innerHTML += tabInfo.url + '<br />';
-    remember();
-    updateContent();
-}
-
-function webcomicAddPopup() {
-    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-        comics_list.innerHTML += tabs[0].url + '<br />';
-        remember();
-        updateContent();
-    });
-}
-
-function updateWebcomic() {
-    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-        comics_list.innerHTML = tabs[0].url;
-        remember();
-        updateContent();
-    });
-}
-
-function gotoWebcomicPage() {
-    browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-        try {
-            browser.tabs.remove(tabs[0].id);
-            browser.tabs.create({url: comics_list.innerHTML});
-        } catch (err) {
-            comics_list.innerHTML = err;
-        }
-    });
-}
-
-/* Utility Functions */
-function getBaseURL(url) {
-    return url.split('/').slice(0, 3).join('/');
-}
