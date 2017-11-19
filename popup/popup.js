@@ -61,7 +61,7 @@ function updateContent() {
                 document.querySelector('#input_title_block').style.display =
                     'block';
                 document.querySelector('#display_title_block').style.display =
-                    'none';
+                    'inline';
             } else {
                 // set comic name
                 document.querySelector('#edit-comic-title').innerHTML =
@@ -70,7 +70,7 @@ function updateContent() {
 
                 // show displayed comic name
                 document.querySelector('#input_title_block').style.display =
-                    'none';
+                    'inline';
                 document.querySelector('#display_title_block').style.display =
                     'block';
             }

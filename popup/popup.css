@@ -8,6 +8,7 @@ html, body{
 }
 
 #buttons{
+    
     padding: 0px;
     border: 0px;
     margin: 0px; 
@@ -40,6 +41,9 @@ html, body{
 }
 
 .button{
+    background-color: #4F88F7;
+    color: #FFFFFF;
+
     top: 0px;
 
     padding: 0px;
