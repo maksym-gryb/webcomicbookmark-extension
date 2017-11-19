@@ -4,9 +4,6 @@ for (let el of document.querySelectorAll('.hidden'))
 
 // Do all the things
 var myWindowId;
-var comic_name = document.querySelector('#comic_name');
-var title_input = document.querySelectorAll('.title_input');
-var edit_comic_name = document.querySelector('#edit-comic-name');
 
 const BOOKMARK_TYPE = 0;
 const FOLDER_TYPE = 1;
@@ -53,26 +50,9 @@ function updateContent() {
             var obj = storedInfo[Object.keys(storedInfo)[0]];
 
             if (!obj || !obj.title) {
-                // set comic name
-                document.querySelector('#edit-comic-title').innerHTML = '';
                 document.querySelector('#display-comic-name').value = '';
-
-                // show editable comic name
-                document.querySelector('#input_title_block').style.display =
-                    'block';
-                document.querySelector('#display_title_block').style.display =
-                    'inline';
             } else {
-                // set comic name
-                document.querySelector('#edit-comic-title').innerHTML =
-                    obj.title;
                 document.querySelector('#display-comic-name').value = obj.title;
-
-                // show displayed comic name
-                document.querySelector('#input_title_block').style.display =
-                    'inline';
-                document.querySelector('#display_title_block').style.display =
-                    'block';
             }
 
             if (!obj)
@@ -85,12 +65,6 @@ function updateContent() {
 browser.tabs.onActivated.addListener(updateContent);
 
 browser.tabs.onUpdated.addListener(updateContent);
-
-edit_comic_name.addEventListener('click', function() {
-    // show editable comic name
-    document.querySelector('#input_title_block').style.display = 'block';
-    document.querySelector('#display_title_block').style.display = 'none';
-});
 
 browser.windows.getCurrent({populate: true}).then((windowInfo) => {
     myWindowId = windowInfo.id;
