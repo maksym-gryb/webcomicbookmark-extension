@@ -58,6 +58,8 @@ function updateContent() {
     });
 }
 
+browser.storage.onChanged.addListener(updateContent);
+
 browser.tabs.onActivated.addListener(updateContent);
 
 browser.tabs.onUpdated.addListener(updateContent);
